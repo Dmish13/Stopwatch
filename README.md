@@ -1,12 +1,17 @@
-# React + Vite
+# Stopwatch Program
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+![Screenshot 2025-06-13 150445](https://github.com/user-attachments/assets/3532da4c-8ec7-4b55-9353-1f88a3a28ae4)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Base Code from Bro Code: https://youtu.be/CgkZ7MvWUAA?si=ncQ6ZDq2l-a6ZxuV&t=15781
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Modified by adding a lap feature to the stopwatch
+
+
+Video Demo: https://github.com/user-attachments/assets/c1da13fe-d127-431d-9af2-76c2aec23518
+
+
+Website: https://dmish13.github.io/Stopwatch/
+
+
