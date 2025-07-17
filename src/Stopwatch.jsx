@@ -10,6 +10,8 @@ function Stopwatch(){
     const lapTimeRef = useRef(0);
     let overallTime = useRef(0);
 
+    
+
     useEffect(()=>{
         if(isRunning){
             intervalIdRef.current = setInterval(()=>{
@@ -44,6 +46,7 @@ function Stopwatch(){
     function lap(){
         if(!isRunning) return;
 
+    
         const lapTime = elapsedTime - lapTimeRef.current;
         setLapTimes(prev => [ 
             {
@@ -54,6 +57,7 @@ function Stopwatch(){
             ...prev
         ]);
         setLaps(laps+1);
+
         lapTimeRef.current = elapsedTime;
         overallTime.current = elapsedTime;
         
@@ -84,6 +88,7 @@ function Stopwatch(){
 
 
     </div>
+    {lapTimes.length>0 && (
     <div className="lapsContainer">
     <div className = "laps">
             <h2>Lap #</h2>
@@ -98,6 +103,7 @@ function Stopwatch(){
                 </div>
             ))}
     </div>
+    )}
     </>)
 }
 
