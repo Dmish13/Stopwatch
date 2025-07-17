@@ -45,12 +45,13 @@ function Stopwatch(){
         if(!isRunning) return;
 
         const lapTime = elapsedTime - lapTimeRef.current;
-        setLapTimes(prev => [...prev, 
+        setLapTimes(prev => [ 
             {
                 lapNumber: laps,
                 lapTime: formatTime(lapTime),
                 overallTime: formatTime(elapsedTime)
-            }
+            },
+            ...prev
         ]);
         setLaps(laps+1);
         lapTimeRef.current = elapsedTime;
