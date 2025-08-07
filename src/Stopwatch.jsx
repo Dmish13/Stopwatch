@@ -5,6 +5,10 @@ function Stopwatch(){
     const [laps, setLaps] = useState(1);
     const [lapTimes, setLapTimes] = useState([]);
     const [buttonText, setButtonText] = useState("Start");
+    const [startButtonColor, setStartButtonColor] = useState("green");
+    const [stopButtonColor, setStopButtonColor] = useState("gray");
+    const [resetButtonColor, setResetButtonColor] = useState("gray");
+    const [lapButtonColor, setLapButtonColor] = useState("gray");
     const intervalIdRef  =useRef(null);
     const startTimeRef = useRef(0);
     const lapTimeRef = useRef(0);
@@ -27,21 +31,37 @@ function Stopwatch(){
     function start(){
         setIsRunning(true);
         startTimeRef.current = Date.now()-elapsedTime;
-        setButtonText("Resume");
+        setStartButtonColor("gray"); // Set to gray when running
+        setStopButtonColor("red");
+        setResetButtonColor("blue");
+        setLapButtonColor("black");
+        
     }
 
     function stop(){
-        setIsRunning(false);
+        if(isRunning){
+            setIsRunning(false);
+            setButtonText("Resume");
+            setStartButtonColor("green");
+            setStopButtonColor("gray");
+            setLapButtonColor("gray");
+        }
+         // Reset to green when stopped
     }
 
     function reset(){
         setElapsedTime(0);
-        setIsRunning(false);
         setButtonText("Start");
+        setResetButtonColor("gray");
+        setIsRunning(false);
+        setStartButtonColor("green");
+        setStopButtonColor("gray");
+        setLapButtonColor("gray");
         setLapTimes([]);
         setLaps(1);
         lapTimeRef.current = 0;
         overallTime.current = 0;
+        
     }
     function lap(){
         if(!isRunning) return;
@@ -80,10 +100,10 @@ function Stopwatch(){
     return(<><div className="stopwatch">
         <div className="display">{formatTime(elapsedTime)}</div>
         <div className="controls">
-            <button onClick= {start} className="start-button">{buttonText}</button>
-            <button onClick= {stop}className="stop-button">Stop</button>
-            <button onClick= {reset}className="reset-button">Reset</button>
-            <button onClick = {lap} className = "lap-button">Lap</button>
+            <button onClick= {start} className="start-button" style = {{backgroundColor : startButtonColor}}>{buttonText}</button>
+            <button onClick= {stop}className="stop-button" style = {{backgroundColor : stopButtonColor}}>Stop</button>
+            <button onClick= {reset}className="reset-button" style = {{backgroundColor : resetButtonColor}}>Reset</button>
+            <button onClick = {lap} className = "lap-button" style = {{backgroundColor : lapButtonColor}}>Lap</button>
         </div>
 
 
@@ -91,17 +111,20 @@ function Stopwatch(){
     {lapTimes.length>0 && (
     <div className="lapsContainer">
     <div className = "laps">
-            <h2>Lap #</h2>
-            <h2> Lap Time</h2>
-            <h2>Overall Time</h2>        
-    </div>
-    {lapTimes.map((lap, idx) => (
+        <div className = "lap-header">
+            <span>Lap #</span>
+            <span> Lap Time</span>
+            <span>Overall Time</span><br></br><br></br>
+        </div>
+            {lapTimes.map((lap, idx) => (
                 <div className="lap" key={idx}>
-                    <h2>{lap.lapNumber}</h2>
-                    <h2>{lap.lapTime}</h2>
-                    <h2 id="time">{lap.overallTime}</h2><br></br><br></br>
+                    <span>{lap.lapNumber}</span>
+                    <span>{lap.lapTime}</span>
+                    <span id="time">{lap.overallTime}</span><br></br><br></br>
                 </div>
-            ))}
+            ))}        
+    </div>
+    
     </div>
     )}
     </>)
